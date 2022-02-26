@@ -4,6 +4,7 @@ package com.gourianova.format.server;
 import com.gourianova.format.StartClient;
 import com.gourianova.format.dto.TextDto;
 import com.gourianova.format.dto.UserInputDto;
+import com.gourianova.format.model.Language;
 import com.gourianova.format.service.TextHandlerService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -36,8 +37,11 @@ public class SingleServer {
 
             UserInputDto userInput = (UserInputDto) in.readObject();
             TextDto textDto = deserializationFromFile();
-            textDto.setTaskNumber(userInput.getTaskNumber());
-
+            Integer taskNumber=userInput.getTaskNumber();
+            if (taskNumber==1)
+            textDto.setLanguage(Language.English);
+            if (taskNumber==2)
+                textDto.setLanguage(Language.French);
             TextHandlerService.handle(textDto);
             out.writeObject(textDto);
         } catch (IOException | ClassNotFoundException e) {
@@ -61,7 +65,7 @@ public class SingleServer {
             ClassLoader classLoader = StartClient.class.getClassLoader();
             String resource = requireNonNull(classLoader.getResource(FILE_PATH)).getFile();
             String text = readFileToString(new File(resource), UTF_8);
-            return new TextDto(text, 2);
+            return new TextDto(text, Language.French);
         } catch (IOException ex) {
             log.error("Can't read resource for reason: {}", ex.getMessage());
             throw new RuntimeException("Can't read resource.");

@@ -3,10 +3,12 @@ package com.gourianova.format.service;
 
 import com.gourianova.format.dto.TextDto;
 
+import com.gourianova.format.model.Language;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 
+import static com.gourianova.format.model.Language.*;
 import static com.gourianova.format.service.TaskHandlerService.*;
 
 
@@ -15,11 +17,11 @@ public class TextHandlerService {
 
     public static void handle(TextDto dto) {
 
-        switch (dto.getTaskNumber()) {
-            case (1):
+        switch (dto.getLanguage()) {
+            case English:
                 handleEnglishTitlesToSrtFormat(dto);
                 break;
-            case (2):
+            case French:
                 handleFrenchTitlesToSrtFormat(dto);
                 break;
             default:

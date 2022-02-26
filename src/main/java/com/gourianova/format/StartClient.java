@@ -4,6 +4,7 @@ import com.gourianova.format.client.Client;
 import com.gourianova.format.constants.ClientConstants;
 import com.gourianova.format.dto.TextDto;
 import com.gourianova.format.dto.UserInputDto;
+import com.gourianova.format.model.Language;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.BufferedReader;
@@ -11,6 +12,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URISyntaxException;
+
+import static com.gourianova.format.model.Language.English;
+import static com.gourianova.format.model.Language.French;
 
 
 @Slf4j
@@ -49,10 +53,14 @@ public class StartClient {
         if (taskNumber == 1) {
 
             fileName = "outEnglish.srt";
+            response.setLanguage(English);
+
 
         } else if (taskNumber == 2) {
 
             fileName = "outFrench.srt";
+            response.setLanguage(French);
+
         } else {
             log.info("Your choice should be \"1\" or \"2\"");
         }
