@@ -11,9 +11,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 
 
 @Slf4j
@@ -31,10 +28,7 @@ public class StartClient {
         BufferedReader inputUser = new BufferedReader(new InputStreamReader(System.in));
 
         Integer taskNumber = Integer.valueOf(inputUser.readLine());
-        Integer lengthOfWord = 5;
-        String letter = "a";
-        String wordStart = "a";
-        String wordEnd = "z";
+
         switch (taskNumber) {
             case (1):
                 log.info("Let's start");
@@ -48,6 +42,7 @@ public class StartClient {
         TextDto response = client.sendMessage(request);
         log.info(String.valueOf(client.getMessage(response)));
         String fileName = "";
+
         if (response != null) {
             log.info("Result is: {}\n\n", "\n", response.getText());
         }
@@ -62,10 +57,10 @@ public class StartClient {
             log.info("Your choice should be \"1\" or \"2\"");
         }
         log.info("You could find the result file here:\n" + fileName);
-       // Path path = Path.of((StartClient.class.getClassLoader().getResource(fileName)).toURI());
-      //  log.info("You could find the result file here:\n" + path);
 
-      //  Files.write(path, response.getText().getBytes(), StandardOpenOption.WRITE);
+        // Path path = Path.of((StartClient.class.getClassLoader().getResource(fileName)).toURI());
+        //  log.info("You could find the result file here:\n" + path);
+        //  Files.write(path, response.getText().getBytes(), StandardOpenOption.WRITE);
 
         try (FileWriter writer = new FileWriter(fileName, false)) {
             writer.append(response.getText());

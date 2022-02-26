@@ -34,9 +34,6 @@ public class EnglishTitlesToSrtFormat {
             }
         }
 
-
-        System.out.println(times.size() + " " + times);
-        System.out.println(subtitles.size() + " " + subtitles);
         String[] tmp = new String[2];
         for (int i = 0; i < times.size(); i++) {
 
@@ -72,9 +69,9 @@ public class EnglishTitlesToSrtFormat {
                     String part = tmpStr.substring(0, 32);
                     int space_devider = part.lastIndexOf(' ');
                     part = part.substring(0, space_devider);
-                    System.out.println(part);
+
                     space_devider = part.lastIndexOf(' ');
-                    System.out.println((part.length() - space_devider) + " space_devider");
+
                     if ((part.length() - space_devider) <= 4) {
                         part = part.substring(0, space_devider);
                         System.out.println("SMALL PART" + part);
@@ -83,7 +80,7 @@ public class EnglishTitlesToSrtFormat {
                     resultString += part + '\n';
                     tmpStr = tmpStr.replace(part, "");
                     if (tmpStr.indexOf(' ') == 0) tmpStr = tmpStr.substring(1);//если вначале пробед - удалить
-                    System.out.println(tmpStr);
+
                 }
 
                 resultString += tmpStr;
