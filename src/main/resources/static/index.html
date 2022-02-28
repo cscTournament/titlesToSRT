@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Перевод субтитров</title>
+</head>
+<body>
+
+
+<script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.8/react.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.8/react-dom.min.js"></script>
+
+<div id="root"></div>
+<script type="text/babel">
+
+
+
+
+
+    var FormBox = React.createClass({
+        getInitialState: function () {
+            return {
+                file: '',
+                imagePreviewUrl: ''
+            }
+        },
+        pressButton: function () {
+            e.preventDefault();
+            // TODO: do something with -> this.state.file
+
+
+
+
+            console.log('handle uploading-', this.state.file);
+        },
+        getPhoto: function (e) {
+            e.preventDefault();
+
+            let reader = new FileReader();
+            let file = e.target.files[0];
+
+            reader.onloadend = () => {
+                this.setState({
+                    file: file,
+                    imagePreviewUrl: reader.result
+                });
+            }
+
+            reader.readAsDataURL(file);
+            console.log('file',file);
+        },
+        render: function () {
+            let {imagePreviewUrl} = this.state;
+            let imagePreview = null;
+            if (imagePreviewUrl) {
+                imagePreview = (<img src={imagePreviewUrl} />);
+            } else {
+                imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
+            }
+            return (
+                <div>
+                    <form action='.' enctype="multipart/form-data">
+                        <input type='file'  onChange={this.getPhoto}/>
+                        <button onClick={this.pressButton}> cancel </button>
+                    </form>
+                    <div className="imgPreview">
+                        {imagePreview}
+                    </div>
+                </div>
+
+        )
+
+
+        function saveInDownloads() {
+
+
+            const superBuffer = new Blob(recordedBlobs, {type: 'video/webm'});
+            let objUrl = window.URL.createObjectURL(superBuffer);
+            let anchor = document.createElement('a');
+            anchor.href = objUrl;
+            anchor.setAttribute('download', this.state);
+            anchor.click();
+            var recordedBlobs = [];
+            var stream = canvas.captureStream();
+            var mediaRecorder = new MediaRecorder(stream, options);
+
+
+            function handleDataAvailable(event) {
+                if (event.data && event.data.size > 0) {
+                    recordedBlobs.push(event.data);
+                }
+            }
+
+
+            function handleStop(event) {
+                debugger;
+                console.log('Recorder stopped: ', event);
+                const superBuffer = new Blob(recordedBlobs, {type: 'video/webm'});
+                video.src = window.URL.createObjectURL(superBuffer);
+            }
+        }}
+    })
+
+
+    ReactDOM.render(  <FormBox />, document.getElementById('root'),
+
+    document.getElementById('save')
+    )
+
+
+
+
+
+
+
+</script>
+</body>
+<div  id="save">
+saving
+    <script >
+        const superBuffer = new Blob(recordedBlobs, { type:'video/webm'});
+        let objUrl = window.URL.createObjectURL(superBuffer);
+        let anchor = document.createElement('a');
+        anchor.href = objUrl;
+        anchor.setAttribute('download', '');
+        anchor.click();
+        var recordedBlobs =[];
+        var stream = canvas.captureStream();
+        var mediaRecorder = new MediaRecorder(stream, options);
+
+
+        function handleDataAvailable(event) {
+            if (event.data && event.data.size > 0) {
+                recordedBlobs.push(event.data);
+            }
+        }
+
+
+        function handleStop(event) {
+            debugger;
+            console.log('Recorder stopped: ', event);
+            const superBuffer = new Blob(recordedBlobs, { type:'video/webm'});
+            video.src = window.URL.createObjectURL(superBuffer);
+        }
+    </script>
+    </script>
+</div>
+</html>
+
